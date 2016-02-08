@@ -19,12 +19,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var statusMenuFirstItem: NSMenuItem!
     @IBOutlet weak var stautsMenuFirstView: NSBox!
+    @IBOutlet weak var disableOnBatteryCheckbox: NSButton!
     @IBOutlet weak var strengthSlider: NSSlider!
     @IBOutlet weak var infoPanel: NSPanel!
     @IBOutlet weak var imageViewInfoPanel: NSImageView!
+    @IBOutlet weak var suspensionInfoPanel: NSPanel!
+    @IBOutlet weak var checkboxInfoPanel: NSPanel!
 
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     private let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(NSVariableStatusItemLength)
+    private var enabled = true
+    private var lastTimestamp: NSTimeInterval = 0
+    private var prevPowerPlugged = true
     private var wallpaperUrl = NSURL.init(string: "dummy")!
 
     private var motionStrength = 0.5
@@ -45,6 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             motionStrength = 0.5
             userDefaults.setDouble(motionStrength, forKey: udkMotionStrength)
         }
+
         strengthSlider.doubleValue = motionStrength
         print("slider value: \(motionStrength)")
 
@@ -56,14 +63,62 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let windowHeight = window.frame.size.height
 
         NSEvent.addGlobalMonitorForEventsMatchingMask([.MouseMovedMask, .LeftMouseDraggedMask, .RightMouseDraggedMask]) {event in
+
+            if event.timestamp - self.lastTimestamp  > 1 {
+                self.lastTimestamp = event.timestamp
+
+                if !self.powerPlugged() {
+                    let disableChecked = (self.disableOnBatteryCheckbox.state == NSOffState)
+                    self.enabled = disableChecked
+                    if self.prevPowerPlugged {
+                        if !disableChecked {
+                            self.showInfoOnRunningOnBattery()
+                        }
+                        self.prevPowerPlugged = false
+                    }
+                } else {
+                    self.enabled = true
+                    self.prevPowerPlugged = true
+                }
+                guard self.enabled else {
+                    return
+                }
+                self.captureDesktopImageIfChanged()
+            }
+
+            // TBD: remove this event callback when disabled; use power and desktop background change notifications to reinitiate
+            guard self.enabled else {
+                return
+            }
+
             let point = event.locationInWindow
             self.mx = point.x / windowWidth - 0.5
             self.my = point.y / windowHeight - 0.5
         }
 
-        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "captureDesktopImageIfChanged", userInfo: nil, repeats: true)
-
         NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "spaceChanged", name: NSWorkspaceActiveSpaceDidChangeNotification, object: NSWorkspace.sharedWorkspace())
+
+        // ref: http://stackoverflow.com/questions/31633503/fetch-the-battery-status-of-my-macbook-with-swift
+        // ref: http://stackoverflow.com/questions/31895449/using-unsafemutablepointer-and-cfrunloopobservercontext-in-swift-2
+        // ref: http://stackoverflow.com/questions/33294620/how-to-cast-self-to-unsafemutablepointervoid-type-in-swift
+        /* TBD
+        var _self = self
+        withUnsafeMutablePointer(&_self) { (pSelf) -> Void in
+            let runLoopSource = IOPSNotificationCreateRunLoopSource({ (pSelf) in
+                // "A C function pointer cannot be formed from a closure that captures context"
+                // let _self = ... pSelf
+            }, UnsafeMutablePointer(pSelf))
+            if let runLoopSource = runLoopSource {
+                CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource.takeRetainedValue(), kCFRunLoopDefaultMode);
+            }
+        }
+        */
+
+        print("received notification \(powerPlugged())")
+    }
+
+    func applicationWillTerminate(aNotification: NSNotification) {
+        // Insert code here to tear down your application
     }
 
     func captureDesktopImageIfChanged() {
@@ -111,9 +166,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let persFactor: CGFloat = 2
         let scale: CGFloat      = 1 + 0.2 * strength
         let hFactor: CGFloat    = -0.05   * strength
-        let hRotFactor: CGFloat = 0.1     * strength
+        let hRotFactor: CGFloat = 0.08    * strength
         let vFactor: CGFloat    = -0.05   * strength
-        let vRotFactor: CGFloat = -0.1    * strength
+        let vRotFactor: CGFloat = -0.08   * strength
 
         let targetLeft = hFactor * amx * windowWidth
         let targetTop = vFactor * amy * windowWidth
@@ -138,26 +193,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         captureDesktopImageIfChanged()
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+    // ref: http://stackoverflow.com/questions/31633503/fetch-the-battery-status-of-my-macbook-with-swift
+    func powerPlugged() -> Bool {
+        let timeRemaining: CFTimeInterval = IOPSGetTimeRemainingEstimate()
+        return timeRemaining <= -2
     }
 
-    
+    func showInfoOnRunningOnBattery() {
+        NSApp.activateIgnoringOtherApps(true)
+        setWindowNextToStatusMenu(suspensionInfoPanel, xBias: 10, yBias: 10)
+        suspensionInfoPanel.makeKeyAndOrderFront(self)
+        checkboxInfoPanel.close()
+        statusItem.popUpStatusItemMenu(self.statusMenu)
+    }
+
+    private func setWindowNextToStatusMenu(window: NSWindow, xBias: CGFloat, yBias: CGFloat) {
+        let xRelativeToScreen = statusItem.button!.window!.convertRectToScreen(statusItem.button!.bounds).origin.x
+        let infoWindowWidth = window.frame.size.width
+        let infoWindowHeight = window.frame.size.height
+        let mainScreenHeight = NSScreen.mainScreen()!.visibleFrame.size.height
+        window.setFrameOrigin(CGPoint(x: xRelativeToScreen - infoWindowWidth - xBias, y: mainScreenHeight - infoWindowHeight - yBias))
+    }
+
+    @IBAction func checkBoxChanged(sender: AnyObject) {
+        let state = (sender as! NSButton).state
+        print("checkbox value: \(state)")
+
+        if state == NSOffState {
+            NSApp.activateIgnoringOtherApps(true)
+            setWindowNextToStatusMenu(checkboxInfoPanel, xBias: 10, yBias: 10)
+            checkboxInfoPanel.makeKeyAndOrderFront(self)
+            suspensionInfoPanel.close()
+        }
+    }
+
     @IBAction func sliderChanged(sender: AnyObject) {
         let value = sender.doubleValue
         print("slider value: \(value)")
+
         motionStrength = value
         userDefaults.setDouble(motionStrength, forKey: udkMotionStrength)
         captureDesktopImageIfChanged()
     }
 
     @IBAction func showInfoPanel(sender: AnyObject) {
-        let xRelativeToScreen = statusItem.button!.window!.convertRectToScreen(statusItem.button!.bounds).origin.x
-        let infoWindowWidth = infoPanel.frame.size.width
-        let mainScreenHeight = NSScreen.mainScreen()!.visibleFrame.size.height
-        infoPanel.setFrameOrigin(CGPoint(x: xRelativeToScreen - infoWindowWidth - 10, y: mainScreenHeight))
-
         NSApp.activateIgnoringOtherApps(true)
+        setWindowNextToStatusMenu(infoPanel, xBias: 20, yBias: 20)
         infoPanel.makeKeyAndOrderFront(self)
     }
 
@@ -172,7 +253,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 
-// http://stackoverflow.com/questions/14099363/get-the-current-wallpaper-in-cocoa
+// ref: http://stackoverflow.com/questions/14099363/get-the-current-wallpaper-in-cocoa
 extension NSImage {
 
     static func desktopPicture() -> NSImage? {

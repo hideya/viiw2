@@ -62,6 +62,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "captureDesktopImageIfChanged", userInfo: nil, repeats: true)
+
+        NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "spaceChanged", name: NSWorkspaceActiveSpaceDidChangeNotification, object: NSWorkspace.sharedWorkspace())
     }
 
     func captureDesktopImageIfChanged() {
@@ -129,6 +131,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentLayer = window.contentView!.layer!
         contentLayer.position = CGPointMake(windowWidth / 2, windowHeight / 2)
         contentLayer.transform = transform
+    }
+
+    func spaceChanged() {
+        print("space changed")
+        captureDesktopImageIfChanged()
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

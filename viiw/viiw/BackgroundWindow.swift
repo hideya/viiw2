@@ -17,7 +17,7 @@ class BackgroundWindow : NSWindow {
         mainScreenSize.height -= NSStatusBar.systemStatusBar().thickness
         setContentSize(mainScreenSize)
 
-        collectionBehavior = [.Stationary, .Transient, .IgnoresCycle]
+        collectionBehavior = [.Stationary, .Transient, .IgnoresCycle, .CanJoinAllSpaces]
         level = Int(CGWindowLevelForKey(CGWindowLevelKey.DesktopWindowLevelKey))
         orderBack(self)
 

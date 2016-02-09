@@ -220,10 +220,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("checkbox value: \(state)")
 
         if state == NSOffState {
+            infoPanel.close()
+            suspensionInfoPanel.close()
             NSApp.activateIgnoringOtherApps(true)
             setWindowNextToStatusMenu(checkboxInfoPanel, xBias: 10, yBias: 10)
             checkboxInfoPanel.makeKeyAndOrderFront(self)
-            suspensionInfoPanel.close()
         }
     }
 
@@ -237,14 +238,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func showInfoPanel(sender: AnyObject) {
+        suspensionInfoPanel.close()
+        checkboxInfoPanel.close()
         NSApp.activateIgnoringOtherApps(true)
         setWindowNextToStatusMenu(infoPanel, xBias: 20, yBias: 20)
         infoPanel.makeKeyAndOrderFront(self)
     }
 
     @IBAction func showMoreInfo(sender: AnyObject) {
-        NSWorkspace.sharedWorkspace().openURL(NSURL.init(string: projectWebSiteUrl)!)
         infoPanel.close()
+        suspensionInfoPanel.close()
+        checkboxInfoPanel.close()
+        NSWorkspace.sharedWorkspace().openURL(NSURL.init(string: projectWebSiteUrl)!)
     }
 
     @IBAction func quitButtonPressed(sender: AnyObject) {

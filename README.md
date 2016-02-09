@@ -1,4 +1,4 @@
-　 ![viiw logo](images/viiw-128.png "viiw logo")
+　 ![viiw logo](images/viiw2-128.png "viiw logo")
 
 
 　　Give your desktop background a feel of depth...

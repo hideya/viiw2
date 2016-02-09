@@ -11,6 +11,7 @@
 		892935421B8A3367001DFD1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 892935401B8A3367001DFD1D /* MainMenu.xib */; };
 		893A53451C65963700E378E6 /* BackgroundWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893A53441C65963700E378E6 /* BackgroundWindow.swift */; };
 		893A53601C65A08900E378E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893A535F1C65A08900E378E6 /* AppDelegate.swift */; };
+		89637A871C698E7300193491 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89637A861C698E7300193491 /* IOKit.framework */; };
 		899FEBC01C65C63000075273 /* viiwTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899FEBBF1C65C63000075273 /* viiwTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,14 +26,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		892935341B8A3367001DFD1D /* viiw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = viiw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		892935341B8A3367001DFD1D /* viiw2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = viiw2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		892935381B8A3367001DFD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8929353E1B8A3367001DFD1D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		892935411B8A3367001DFD1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		892935471B8A3367001DFD1D /* viiwTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = viiwTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		892935471B8A3367001DFD1D /* viiw2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = viiw2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8929354C1B8A3367001DFD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		893A53441C65963700E378E6 /* BackgroundWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundWindow.swift; sourceTree = "<group>"; };
 		893A535F1C65A08900E378E6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		89637A861C698E7300193491 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		89637A891C698F0A00193491 /* viiw2-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "viiw2-Bridging-Header.h"; sourceTree = "<group>"; };
 		899FEBBF1C65C63000075273 /* viiwTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viiwTests.swift; sourceTree = "<group>"; };
 		89F252C61B94DE5100648B8B /* viiw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = viiw.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -42,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89637A871C698E7300193491 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +62,7 @@
 		8929352B1B8A3367001DFD1D = {
 			isa = PBXGroup;
 			children = (
+				89637A861C698E7300193491 /* IOKit.framework */,
 				892935361B8A3367001DFD1D /* viiw */,
 				8929354A1B8A3367001DFD1D /* viiwTests */,
 				892935351B8A3367001DFD1D /* Products */,
@@ -67,8 +72,8 @@
 		892935351B8A3367001DFD1D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				892935341B8A3367001DFD1D /* viiw.app */,
-				892935471B8A3367001DFD1D /* viiwTests.xctest */,
+				892935341B8A3367001DFD1D /* viiw2.app */,
+				892935471B8A3367001DFD1D /* viiw2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +87,7 @@
 				892935401B8A3367001DFD1D /* MainMenu.xib */,
 				89F252C61B94DE5100648B8B /* viiw.entitlements */,
 				89F7B3081C682178001FD2E1 /* Supporting Files */,
+				89637A891C698F0A00193491 /* viiw2-Bridging-Header.h */,
 			);
 			path = viiw;
 			sourceTree = "<group>";
@@ -114,9 +120,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		892935331B8A3367001DFD1D /* viiw */ = {
+		892935331B8A3367001DFD1D /* viiw2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 892935511B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw" */;
+			buildConfigurationList = 892935511B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw2" */;
 			buildPhases = (
 				892935301B8A3367001DFD1D /* Sources */,
 				892935311B8A3367001DFD1D /* Frameworks */,
@@ -126,14 +132,14 @@
 			);
 			dependencies = (
 			);
-			name = viiw;
+			name = viiw2;
 			productName = viiw;
-			productReference = 892935341B8A3367001DFD1D /* viiw.app */;
+			productReference = 892935341B8A3367001DFD1D /* viiw2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		892935461B8A3367001DFD1D /* viiwTests */ = {
+		892935461B8A3367001DFD1D /* viiw2Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 892935541B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiwTests" */;
+			buildConfigurationList = 892935541B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw2Tests" */;
 			buildPhases = (
 				892935431B8A3367001DFD1D /* Sources */,
 				892935441B8A3367001DFD1D /* Frameworks */,
@@ -144,9 +150,9 @@
 			dependencies = (
 				892935491B8A3367001DFD1D /* PBXTargetDependency */,
 			);
-			name = viiwTests;
+			name = viiw2Tests;
 			productName = viiwTests;
-			productReference = 892935471B8A3367001DFD1D /* viiwTests.xctest */;
+			productReference = 892935471B8A3367001DFD1D /* viiw2.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -177,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8929352F1B8A3367001DFD1D /* Build configuration list for PBXProject "viiw" */;
+			buildConfigurationList = 8929352F1B8A3367001DFD1D /* Build configuration list for PBXProject "viiw2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -190,8 +196,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				892935331B8A3367001DFD1D /* viiw */,
-				892935461B8A3367001DFD1D /* viiwTests */,
+				892935331B8A3367001DFD1D /* viiw2 */,
+				892935461B8A3367001DFD1D /* viiw2Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -238,7 +244,7 @@
 /* Begin PBXTargetDependency section */
 		892935491B8A3367001DFD1D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 892935331B8A3367001DFD1D /* viiw */;
+			target = 892935331B8A3367001DFD1D /* viiw2 */;
 			targetProxy = 892935481B8A3367001DFD1D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -272,7 +278,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -315,7 +321,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -340,13 +346,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = viiw/viiw.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = viiw/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.hideya.viiw2;
-				PRODUCT_NAME = viiw;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PRODUCT_NAME = viiw2;
+				SWIFT_OBJC_BRIDGING_HEADER = "viiw/viiw2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -357,13 +363,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = viiw/viiw.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = viiw/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.hideya.viiw2;
-				PRODUCT_NAME = viiw;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PRODUCT_NAME = viiw2;
+				SWIFT_OBJC_BRIDGING_HEADER = "viiw/viiw2-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -383,9 +389,9 @@
 				);
 				INFOPLIST_FILE = viiwTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = viiwTests;
+				PRODUCT_NAME = viiw2;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/viiw.app/Contents/MacOS/viiw";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/viiw2.app/Contents/MacOS/viiw2";
 			};
 			name = Debug;
 		};
@@ -401,15 +407,15 @@
 				);
 				INFOPLIST_FILE = viiwTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = viiwTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/viiw.app/Contents/MacOS/viiw";
+				PRODUCT_NAME = viiw2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/viiw2.app/Contents/MacOS/viiw2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8929352F1B8A3367001DFD1D /* Build configuration list for PBXProject "viiw" */ = {
+		8929352F1B8A3367001DFD1D /* Build configuration list for PBXProject "viiw2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8929354F1B8A3367001DFD1D /* Debug */,
@@ -418,7 +424,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		892935511B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw" */ = {
+		892935511B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				892935521B8A3367001DFD1D /* Debug */,
@@ -427,7 +433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		892935541B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiwTests" */ = {
+		892935541B8A3367001DFD1D /* Build configuration list for PBXNativeTarget "viiw2Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				892935551B8A3367001DFD1D /* Debug */,

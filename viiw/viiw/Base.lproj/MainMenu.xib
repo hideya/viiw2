@@ -12,14 +12,17 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="viiw">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="viiw2">
             <connections>
+                <outlet property="checkboxInfoPanel" destination="R46-Wp-GAb" id="cG9-WK-pik"/>
+                <outlet property="disableOnBatteryCheckbox" destination="XED-Fo-JWf" id="gP8-d9-8bf"/>
                 <outlet property="imageViewInfoPanel" destination="Xrp-HI-zc2" id="omM-GR-E3b"/>
                 <outlet property="infoPanel" destination="fBs-Fs-Bef" id="e9X-Ue-bnS"/>
                 <outlet property="statusMenu" destination="NEz-1h-Ge6" id="Z8a-Ks-1cx"/>
                 <outlet property="statusMenuFirstItem" destination="Qbt-n6-m5J" id="lk3-gh-45T"/>
                 <outlet property="stautsMenuFirstView" destination="tYq-Ha-jrG" id="JaH-zr-pqd"/>
                 <outlet property="strengthSlider" destination="9NN-0s-v5t" id="vur-fJ-uZg"/>
+                <outlet property="suspensionInfoPanel" destination="9cv-ak-uOy" id="7sh-qd-fFE"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -30,9 +33,9 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-523" y="-6.5"/>
+            <point key="canvasLocation" x="-407" y="-13.5"/>
         </menu>
-        <window title="viiw" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="BackgroundWindow" customModule="viiw" customModuleProvider="target">
+        <window title="viiw2" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g" customClass="BackgroundWindow" customModule="viiw2">
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="147" height="82"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1577"/>
@@ -40,9 +43,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="147" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <point key="canvasLocation" x="-468.5" y="-126"/>
+            <point key="canvasLocation" x="-597.5" y="-126"/>
         </window>
-        <window title="viiw" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="fBs-Fs-Bef" customClass="NSPanel">
+        <window title="viiw2" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="fBs-Fs-Bef" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="272" y="199" width="250" height="200"/>
@@ -59,8 +62,8 @@
                         <rect key="frame" x="24" y="45" width="203" height="72"/>
                         <textFieldCell key="cell" refusesFirstResponder="YES" allowsUndo="NO" state="on" alignment="center" id="JhD-rQ-NEG">
                             <font key="font" metaFont="system"/>
-                            <string key="title">Give your desktop background
-a feel of depth...
+                            <string key="title">Spacious desktop experience
+with a feel of depth!
 For more info,
 please visit</string>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -79,17 +82,17 @@ please visit</string>
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-417" y="369"/>
+            <point key="canvasLocation" x="-546" y="440"/>
         </window>
         <box autoresizesSubviews="NO" borderType="line" id="tYq-Ha-jrG">
-            <rect key="frame" x="0.0" y="0.0" width="30" height="181"/>
+            <rect key="frame" x="0.0" y="0.0" width="30" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" id="cW7-cL-R8L">
-                <rect key="frame" x="1" y="1" width="28" height="165"/>
+                <rect key="frame" x="1" y="1" width="28" height="184"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRh-6D-Opu">
-                        <rect key="frame" x="2" y="31" width="25" height="25"/>
+                    <button toolTip="Show info web page" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IRh-6D-Opu">
+                        <rect key="frame" x="2" y="30" width="25" height="25"/>
                         <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gw4-mT-a4X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="13" name="AppleColorEmoji"/>
@@ -98,8 +101,8 @@ please visit</string>
                             <action selector="showInfoPanel:" target="Voe-Tx-rLC" id="SEq-bz-DbY"/>
                         </connections>
                     </button>
-                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sZ-dC-7q8">
-                        <rect key="frame" x="-5" y="-1" width="39" height="38"/>
+                    <button toolTip="Quit viiw2" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1sZ-dC-7q8">
+                        <rect key="frame" x="-5" y="-2" width="39" height="38"/>
                         <buttonCell key="cell" type="round" title="❌" bezelStyle="circular" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="Vl0-Xf-Ld2" colorLabel="IBBuiltInLabel-Red">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" size="16" name="AppleColorEmoji"/>
@@ -108,18 +111,89 @@ please visit</string>
                             <action selector="quitButtonPressed:" target="Voe-Tx-rLC" id="tXA-S6-6T6"/>
                         </connections>
                     </button>
-                    <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NN-0s-v5t">
-                        <rect key="frame" x="4" y="61" width="21" height="100"/>
+                    <slider toolTip="Adjust strength of motion" horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NN-0s-v5t">
+                        <rect key="frame" x="4" y="60" width="21" height="100"/>
                         <sliderCell key="cell" state="on" alignment="left" minValue="0.10000000000000001" maxValue="1" doubleValue="0.5" tickMarkPosition="right" sliderType="linear" id="Vdp-K6-6lX"/>
                         <connections>
                             <action selector="sliderChanged:" target="Voe-Tx-rLC" id="239-MT-4dg"/>
                         </connections>
                     </slider>
+                    <button toolTip="Check to disable motion when on battery" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XED-Fo-JWf">
+                        <rect key="frame" x="6" y="164" width="22" height="18"/>
+                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PdZ-ra-zHK">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="checkBoxChanged:" target="Voe-Tx-rLC" id="8gq-6k-FFU"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-407" y="73.5"/>
+            <point key="canvasLocation" x="-407" y="145"/>
         </box>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="9cv-ak-uOy" customClass="NSPanel">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="272" y="199" width="200" height="70"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1577"/>
+            <view key="contentView" id="b0p-V5-DYW">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cMB-QQ-UlA">
+                        <rect key="frame" x="170" y="38" width="29" height="32"/>
+                        <buttonCell key="cell" type="bevel" title="▶︎" bezelStyle="rounded" alignment="right" imageScaling="proportionallyDown" inset="2" id="2yf-Zu-8rP">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" size="13" name=".LucidaGrandeUI"/>
+                        </buttonCell>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8MQ-dS-IYl">
+                        <rect key="frame" x="-2" y="3" width="198" height="59"/>
+                        <textFieldCell key="cell" refusesFirstResponder="YES" allowsUndo="NO" state="on" alignment="center" id="I9w-Dg-6Vu">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Disabled when on battery.
+Uncheck this to enable
+while even on battery.</string>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-571" y="95"/>
+        </window>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hasShadow="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="R46-Wp-GAb" customClass="NSPanel">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="272" y="199" width="200" height="50"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1577"/>
+            <view key="contentView" id="2k5-7I-uQ1">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HXZ-V0-HvG">
+                        <rect key="frame" x="170" y="18" width="29" height="32"/>
+                        <buttonCell key="cell" type="bevel" title="▶︎" bezelStyle="rounded" alignment="right" imageScaling="proportionallyDown" inset="2" id="t74-z4-Rs8">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9H-tz-vjf">
+                        <rect key="frame" x="-2" y="1" width="198" height="42"/>
+                        <textFieldCell key="cell" refusesFirstResponder="YES" allowsUndo="NO" state="on" alignment="center" id="O2S-bc-4wQ">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Check this to suspend
+while running on battery.</string>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-571" y="221"/>
+        </window>
     </objects>
 </document>

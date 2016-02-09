@@ -1,4 +1,4 @@
-　 ![viiw logo](viiw/viiw/Images.xcassets/AppIcon.appiconset/viiw-128.png "viiw logo")
+　 ![viiw logo](viiw/viiw/Images.xcassets/AppIcon.appiconset/viiw2-128.png "viiw logo")
 
 
 　　Give your desktop background a feel of depth...

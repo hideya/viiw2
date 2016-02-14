@@ -31,7 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var enabled = true
     private var lastTimestamp: NSTimeInterval = 0
     private var prevPowerPlugged = true
-    private var wallpaperUrl = NSURL.init(string: "dummy")!
+    private var currentWallpaper = NSURL.init(string: "dummy")!
+    private var currentScreenFrame = CGRect()
 
     private var motionStrength = 0.5
     private var mx: CGFloat = 0.0
@@ -58,9 +59,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         captureDesktopImageIfChanged()
 
         NSTimer.scheduledTimerWithTimeInterval(1.0 / 20, target: self, selector: "update", userInfo: nil, repeats: true)
-
-        let windowWidth = window.frame.size.width
-        let windowHeight = window.frame.size.height
 
         NSEvent.addGlobalMonitorForEventsMatchingMask([.MouseMovedMask, .LeftMouseDraggedMask, .RightMouseDraggedMask]) {event in
 
@@ -92,8 +90,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
 
             let point = event.locationInWindow
-            self.mx = point.x / windowWidth - 0.5
-            self.my = point.y / windowHeight - 0.5
+            self.mx = point.x / self.window.frame.size.width - 0.5
+            self.my = point.y / self.window.frame.size.height - 0.5
         }
 
         NSWorkspace.sharedWorkspace().notificationCenter.addObserver(self, selector: "spaceChanged", name: NSWorkspaceActiveSpaceDidChangeNotification, object: NSWorkspace.sharedWorkspace())
@@ -113,8 +111,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         */
-
-        print("received notification \(powerPlugged())")
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
@@ -126,22 +122,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        let newWallpaperUrl = NSWorkspace.sharedWorkspace().desktopImageURLForScreen(NSScreen.mainScreen()!)!
-        if newWallpaperUrl == wallpaperUrl {
+        let newWallpaper = NSWorkspace.sharedWorkspace().desktopImageURLForScreen(NSScreen.mainScreen()!)!
+        let newScreenFrame = NSScreen.mainScreen()!.frame
+
+        if newWallpaper == currentWallpaper && CGRectEqualToRect(newScreenFrame, currentScreenFrame){
             return
         }
 
-        let wallpaperOp = NSImage.desktopPicture()
-        guard let wallpaper = wallpaperOp else {
+        let wallpaperImageOp = NSImage.desktopPicture()
+        guard let wallpaperImage = wallpaperImageOp else {
             return
         }
+        currentWallpaper = newWallpaper
+        print("captured desktop image: \(currentWallpaper)")
 
-        print("capturing desktop image: \(newWallpaperUrl)")
-        wallpaperUrl = newWallpaperUrl
+        currentScreenFrame = NSScreen.mainScreen()!.frame;
+        window.setFrame(currentScreenFrame, display: true)
 
         window.contentView!.wantsLayer = true
         let contentLayer = window.contentView!.layer!
-        contentLayer.contents = wallpaper
+        contentLayer.contents = wallpaperImage
     }
 
     func update() {
@@ -163,12 +163,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let strength = CGFloat(motionStrength)
-        let persFactor: CGFloat = 2
-        let scale: CGFloat      = 1 + 0.2 * strength
-        let hFactor: CGFloat    = -0.05   * strength
-        let hRotFactor: CGFloat = 0.08    * strength
-        let vFactor: CGFloat    = -0.05   * strength
-        let vRotFactor: CGFloat = -0.08   * strength
+        let persFactor: CGFloat =  2
+        let scale: CGFloat      =  1 + 0.15 * strength
+        let hFactor: CGFloat    = -0.05 * strength
+        let hRotFactor: CGFloat =  0.07 * strength
+        let vFactor: CGFloat    = -0.05 * strength
+        let vRotFactor: CGFloat = -0.07 * strength
 
         let targetLeft = hFactor * amx * windowWidth
         let targetTop = vFactor * amy * windowWidth
@@ -225,6 +225,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.activateIgnoringOtherApps(true)
             setWindowNextToStatusMenu(checkboxInfoPanel, xBias: 10, yBias: 10)
             checkboxInfoPanel.makeKeyAndOrderFront(self)
+            self.checkboxInfoPanel.animator().alphaValue = 1.0
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                self.checkboxInfoPanel.animator().alphaValue = 0.0
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+                    self.checkboxInfoPanel.close()
+                });
+            });
         }
     }
 
